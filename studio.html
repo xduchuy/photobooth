@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio - Ảnh vừa chụp</title>
+  <meta name="description" content="Ảnh vừa chụp trong photobooth studio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+</head>
+
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <main class="app">
+    <header class="topbar">
+      <div class="topbar-left">
+        <a class="logo-link" href="index.html" aria-label="Home" data-i18n-aria="brand.home">
+          <img class="logo-img" src="fire.png" alt="Photobooth logo" data-i18n-alt="brand.logoAlt">
+        </a>
+      </div>
+      <nav class="nav">
+        <a href="gioithieu.html" data-i18n="nav.about">giới thiệu</a>
+        <a href="layout.html" data-i18n="nav.choose">studio</a>
+        <a href="chinhsach.html" data-i18n="nav.privacy">chính sách</a>
+        <a href="index.html#contact" data-i18n="nav.contact">liên hệ</a>
+      </nav>
+      <div class="topbar-right">
+        <button class="lang-toggle" type="button" aria-label="Switch language">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+            <path d="M3.5 12h17M12 3.5c2.5 2.8 4 6 4 8.5s-1.5 5.7-4 8.5M12 3.5c-2.5 2.8-4 6-4 8.5s1.5 5.7 4 8.5"
+              fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+          </svg>
+          <span class="lang-label">VI</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="studio-page">
+      <div class="photo-card">
+        <span class="tag">Ảnh vừa chụp</span>
+        <h1>Khung ảnh mới nhất</h1>
+        <p class="lead">Đây là ảnh vừa chụp trong Studio, hiển thị ở kích thước dễ nhìn rõ.</p>
+
+        <div class="photo-frame">
+          <img id="latestPhoto" src="" alt="Ảnh vừa chụp">
+          <div id="emptyState" class="empty" hidden>Chưa có ảnh. Hãy quay lại Studio và chụp thêm.</div>
+        </div>
+
+        <div>
+          <h2>10 ảnh gần nhất</h2>
+          <div id="recentGallery" class="gallery"></div>
+        </div>
+
+        <div class="actions">
+          <a class="ghost" href="index.html#studio">Quay lại Studio</a>
+          <a id="downloadLink" class="ghost" href="#" download="photobooth-latest.png">Tải về</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Photobooth Studio - Ảnh vừa chụp.</span>
+    </footer>
+  </main>
+
+  <a class="ig-badge ig-float" href="https://www.instagram.com/xduchuy_/" target="_blank" rel="noopener"
+    aria-label="Instagram">
+    <span class="ig-icon" aria-hidden="true"></span>
+    <div>
+      <span data-i18n="ig.follow">Theo dõi trên Instagram</span>
+      <strong>@xduchuy_</strong>
+    </div>
+  </a>
+
+  <div class="spin-badge" aria-hidden="true">
+    <img src="xoay.png" alt="">
+  </div>
+
+  <script src="studio.js"></script>
+  <script src="lang.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log('Service Worker registered', reg))
+          .catch(err => console.log('Service Worker registration failed', err));
+      });
+    }
+  </script>
+</body>
+
+</html>

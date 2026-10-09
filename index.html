@@ -1,0 +1,326 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Photobooth Studio</title>
+  <meta name="description" content="Photobooth studio: chup nhanh, chon filter, luu anh.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+</head>
+
+<body class="home-page" id="top">
+  <div class="noise" aria-hidden="true"></div>
+
+  <main class="app">
+    <header class="topbar">
+      <div class="topbar-left">
+        <a class="logo-link" href="index.html" aria-label="Home" data-i18n-aria="brand.home">
+          <img class="logo-img" src="fire.png" alt="Photobooth logo" data-i18n-alt="brand.logoAlt">
+        </a>
+      </div>
+      <nav class="nav">
+        <a href="gioithieu.html" data-i18n="nav.about">about</a>
+        <a href="layout.html" data-i18n="nav.choose">studio</a>
+        <a href="chinhsach.html" data-i18n="nav.privacy">privacy policy</a>
+        <a href="#contact" data-i18n="nav.contact">contact</a>
+      </nav>
+      <div class="topbar-right">
+        <button class="lang-toggle" type="button" aria-label="Switch language">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+            <path d="M3.5 12h17M12 3.5c2.5 2.8 4 6 4 8.5s-1.5 5.7-4 8.5M12 3.5c-2.5 2.8-4 6-4 8.5s1.5 5.7 4 8.5"
+              fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+          </svg>
+          <span class="lang-label">VI</span>
+        </button>
+      </div>
+    </header>
+    <section class="landing">
+      <div class="landing-card">
+        <div class="badge badge--slider">
+          <button class="badge-handle" type="button" aria-controls="coming-soon-text" aria-expanded="false"
+            data-i18n-aria="banner.toggle">
+            <span class="badge-handle-icon" aria-hidden="true"></span>
+          </button>
+          <span class="badge-track" id="coming-soon-text">
+            <span class="badge-text" data-i18n="banner.text">Coming Soon: Live image in Photo Strip, cool filters, more
+              stickers, more background frames.</span>
+          </span>
+        </div>
+        <div class="landing-hero">
+          <div class="title-block">
+            <h1 class="hero-title">
+              <span class="hero-line hero-line--chips">
+                <span class="hero-word hero-word--gradient" data-i18n="hero.word1">Capture</span>
+                <span class="hero-chip-group" aria-hidden="true">
+                  <span class="hero-chip hero-chip--a"></span>
+                  <span class="hero-chip hero-chip--b"></span>
+                  <span class="hero-chip hero-chip--c"></span>
+                </span>
+              </span>
+              <span class="hero-line hero-line--chips">
+                <span class="hero-word hero-word--accent" data-i18n="hero.word2">precious</span>
+                <span class="hero-chip hero-chip--d" aria-hidden="true"></span>
+                <span class="hero-word hero-word--gradient" data-i18n="hero.word3">memories</span>
+                <span class="hero-chip hero-chip--e" aria-hidden="true"></span>
+              </span>
+            </h1>
+            <p data-i18n="hero.subtitle">Capture the moment, cherish the magic, relive the love.</p>
+            <div class="meta-row">
+              <span>ETS</span>
+              <button class="start-slider" type="button" data-target="chup.html" data-i18n-aria="hero.cta">
+                <span class="start-slider-text" data-i18n="hero.cta">START</span>
+                <span class="start-slider-knob" aria-hidden="true">
+                  <img class="start-slider-heart" src="tim1.png" alt="">
+                </span>
+              </button>
+              <span>2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="spotlight" class="spotlight spotlight--swipe spotlight--home">
+      <div class="spotlight-header">
+        <div>
+          <span class="spotlight-eyebrow">Highlights</span>
+        </div>
+        <div class="spotlight-dots" role="tablist" aria-label="Spotlight dots"></div>
+      </div>
+
+      <div class="spotlight-shell" aria-label="Spotlight carousel">
+        <button class="spotlight-nav prev" type="button" aria-label="Prev spotlight">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+        <div class="spotlight-viewport">
+          <div class="spotlight-track">
+            <article class="spotlight-item">
+              <div class="spotlight-card">
+                <div class="spotlight-thumb" style="--thumb: linear-gradient(135deg, #ffdceb, #fefdd0);" role="img"
+                  aria-label="Mini film booth">
+                  <img class="spotlight-thumb-img" src="comming.png" alt="">
+                </div>
+              </div>
+            </article>
+            <article class="spotlight-item">
+              <div class="spotlight-card">
+                <div class="spotlight-thumb" style="--thumb: linear-gradient(135deg, #fefdd0, #ffdceb);" role="img"
+                  aria-label="Golden hour set">
+                  <img class="spotlight-thumb-img" src="comming.png" alt="">
+                </div>
+              </div>
+            </article>
+            <article class="spotlight-item">
+              <div class="spotlight-card">
+                <div class="spotlight-thumb" style="--thumb: linear-gradient(135deg, #ffdceb, #fefdd0);" role="img"
+                  aria-label="Neon nights">
+                  <img class="spotlight-thumb-img" src="comming.png" alt="">
+                </div>
+              </div>
+            </article>
+            <article class="spotlight-item">
+              <div class="spotlight-card">
+                <div class="spotlight-thumb" style="--thumb: linear-gradient(135deg, #fefdd0, #ffdceb);" role="img"
+                  aria-label="Studio slow film">
+                  <img class="spotlight-thumb-img" src="comming.png" alt="">
+                </div>
+              </div>
+            </article>
+            <article class="spotlight-item">
+              <div class="spotlight-card">
+                <div class="spotlight-thumb" style="--thumb: linear-gradient(135deg, #ffdceb, #fefdd0);" role="img"
+                  aria-label="Soft bloom">
+                  <img class="spotlight-thumb-img" src="comming.png" alt="">
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <button class="spotlight-nav next" type="button" aria-label="Next spotlight">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <div class="contact-container">
+        <div class="contact-content">
+          <span class="contact-eyebrow" data-i18n="contact.eyebrow">Liên hệ</span>
+          <h2 data-i18n="contact.title">Kết nối với chúng tôi</h2>
+          <p data-i18n="contact.subtitle">Follow, nhận ưu đãi và đặt lịch chụp nhanh. Chúng tôi luôn sẵn sàng lắng nghe
+            bạn.</p>
+
+          <div class="contact-socials">
+            <a class="social-card social-card--ig" href="https://www.instagram.com/xduchuy_/" target="_blank"
+              rel="noopener" aria-label="Instagram">
+              <div class="social-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+              </div>
+              <div class="social-info">
+                <span class="social-name">Instagram</span>
+                <span class="social-handle">@xduchuy_</span>
+              </div>
+            </a>
+
+            <a class="social-card social-card--fb" href="https://facebook.com/" target="_blank" rel="noopener"
+              aria-label="Facebook">
+              <div class="social-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                </svg>
+              </div>
+              <div class="social-info">
+                <span class="social-name">Facebook</span>
+                <span class="social-handle">Photobooth Studio</span>
+              </div>
+            </a>
+
+            <a class="social-card social-card--email" href="mailto:hello@example.com" aria-label="Email">
+              <div class="social-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+              </div>
+              <div class="social-info">
+                <span class="social-name">Email</span>
+                <span class="social-handle">hello@photobooth.com</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-form-card">
+          <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault();">
+            <div class="form-group">
+              <label for="name" data-i18n="contact.name">Tên của bạn</label>
+              <input type="text" id="name" name="name" placeholder="Nhập tên của bạn..."
+                data-i18n-placeholder="contact.placeholderName" required>
+            </div>
+            <div class="form-group">
+              <label for="email" data-i18n="contact.email">Email</label>
+              <input type="email" id="email" name="email" placeholder="name@example.com"
+                data-i18n-placeholder="contact.placeholderEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="message" data-i18n="contact.message">Lời nhắn</label>
+              <textarea id="message" name="message" rows="4" placeholder="Bạn muốn nhắn gì..."
+                data-i18n-placeholder="contact.placeholderMessage" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+              <span data-i18n="contact.send">Gửi tin nhắn</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Photobooth Studio • No app, chỉ là trình duyệt.</span>
+    </footer>
+  </main>
+
+  <a class="back-to-top" href="#top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 5l-7 7h4v7h6v-7h4z" fill="currentColor" />
+    </svg>
+  </a>
+
+  <a class="ig-badge ig-float" href="https://www.instagram.com/xduchuy_/" target="_blank" rel="noopener"
+    aria-label="Instagram">
+    <span class="ig-icon" aria-hidden="true"></span>
+    <div>
+      <span data-i18n="ig.follow">Follow us on Instagram</span>
+      <strong>@xduchuy_</strong>
+    </div>
+  </a>
+
+  <div class="spin-badge" aria-hidden="true">
+    <img src="xoay.png" alt="">
+  </div>
+
+  <script src="lang.js"></script>
+  <script src="search.js"></script>
+  <script src="spotlight.js"></script>
+  <script src="badge-slider.js"></script>
+  <script src="slider.js"></script>
+  <script src="back-to-top.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log('Service Worker registered', reg))
+          .catch(err => console.log('Service Worker registration failed', err));
+      });
+    }
+  </script>
+  <div id="toast" class="toast" role="alert" aria-live="polite">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span id="toast-message">Tin nhắn đã được gửi!</span>
+  </div>
+
+  <script>
+    const contactForm = document.querySelector('.contact-form');
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toast-message');
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Simulate sending
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+
+        // Show success after 1s
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          contactForm.reset();
+
+          // Show toast
+          const lang = document.documentElement.lang || 'vi';
+          const msg = lang === 'vi' ? 'Tin nhắn đã được gửi!' : 'Message sent successfully!';
+          if (toastMsg) toastMsg.textContent = msg;
+
+          if (toast) {
+            toast.classList.add('show');
+            setTimeout(() => {
+              toast.classList.remove('show');
+            }, 3000);
+          }
+        }, 800);
+      });
+    }
+  </script>
+</body>
+
+</html>

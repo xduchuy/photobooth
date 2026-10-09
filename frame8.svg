@@ -1,0 +1,31 @@
+<svg width="540" height="800" viewBox="0 0 540 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <mask id="neon-mask">
+      <rect width="540" height="800" fill="white"/>
+      <!-- Photo Slots -->
+      <rect x="30" y="30" width="480" height="350" rx="8" fill="black"/>
+      <rect x="30" y="400" width="480" height="350" rx="8" fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- Dark Background -->
+  <rect width="540" height="800" fill="#0f0f1a" mask="url(#neon-mask)"/>
+  
+  <!-- Neon Borders (On top) -->
+  <rect x="30" y="30" width="480" height="350" rx="8" stroke="#00f2ea" stroke-width="2" fill="none" class="neon-box" filter="url(#glow)"/>
+  <rect x="30" y="400" width="480" height="350" rx="8" stroke="#ff0050" stroke-width="2" fill="none" class="neon-box" filter="url(#glow)"/>
+  
+  <!-- Cyberpunk Accents -->
+  <path d="M540 0 L540 100 L500 0 Z" fill="#ff0050"/>
+  <path d="M0 800 L0 700 L40 800 Z" fill="#00f2ea"/>
+  
+  <!-- Text -->
+  <text x="270" y="780" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="20" fill="#fff" letter-spacing="4">FUTURE_MODE</text>
+</svg>

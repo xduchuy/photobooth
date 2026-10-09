@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chup anh - Photobooth</title>
+  <meta name="description" content="Trang chup anh photobooth.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+</head>
+
+<body class="capture-page">
+  <div class="noise" aria-hidden="true"></div>
+
+  <main class="app">
+    <header class="topbar">
+      <div class="topbar-left">
+        <a class="logo-link" href="index.html" aria-label="Home" data-i18n-aria="brand.home">
+          <img class="logo-img" src="fire.png" alt="Photobooth logo" data-i18n-alt="brand.logoAlt">
+        </a>
+      </div>
+      <nav class="nav">
+        <a href="gioithieu.html" data-i18n="nav.about">about</a>
+        <a href="layout.html" data-i18n="nav.choose">studio</a>
+        <a href="chinhsach.html" data-i18n="nav.privacy">privacy policy</a>
+        <a href="index.html#contact" data-i18n="nav.contact">contact</a>
+      </nav>
+      <div class="topbar-right">
+        <button class="lang-toggle" type="button" aria-label="Switch language">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+            <path d="M3.5 12h17M12 3.5c2.5 2.8 4 6 4 8.5s-1.5 5.7-4 8.5M12 3.5c-2.5 2.8-4 6-4 8.5s1.5 5.7 4 8.5"
+              fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+          </svg>
+          <span class="lang-label">VI</span>
+        </button>
+      </div>
+    </header>
+
+    <section id="studio" class="hero">
+      <div class="capture" id="capture">
+        <aside class="capture-gallery" aria-label="Anh vua chup">
+          <div id="gallery" class="capture-gallery__list" data-layout="vertical" aria-live="polite"></div>
+        </aside>
+        <div class="capture__stage">
+          <div class="capture__intro">
+            <span class="tag" data-i18n="capture.tag">PHOTObooth lab</span>
+          </div>
+
+          <div class="preview">
+            <div class="stage" data-filter="clean" data-frame="none" data-ratio="16-9">
+              <video id="video" autoplay playsinline muted></video>
+              <canvas id="canvas" width="1280" height="720"></canvas>
+              <div class="frame-overlay" aria-hidden="true"></div>
+              <div class="countdown" id="countdown" aria-live="polite"></div>
+            </div>
+            <div class="actions">
+              <button id="shutterBtn" class="shutter" type="button" data-i18n="capture.cta">Chup ngay</button>
+              <span id="status" class="status" data-tone=""></span>
+            </div>
+            <div class="tray">
+              <button id="downloadBtn" class="ghost" type="button" disabled>Tải ảnh</button>
+              <button id="retakeBtn" class="ghost" type="button" disabled>Chụp lại</button>
+            </div>
+
+          </div>
+
+          <section class="spotlight frame-suggest" id="frame-suggest">
+            <div class="spotlight-header">
+              <div>
+                <span class="spotlight-eyebrow">Gợi ý khung</span>
+                <h2>Chọn khung để áp vào màn hình chụp</h2>
+                <p>Chọn khung ở dưới, khung sẽ áp vào live preview và từng ảnh chụp.</p>
+              </div>
+              <div class="spotlight-dots" role="tablist" aria-label="Frame suggestion dots"></div>
+            </div>
+
+            <div class="frame-suggest-body">
+              <div class="spotlight-shell" aria-label="Frame suggestion carousel">
+                <button class="spotlight-nav prev" type="button" aria-label="Khung trước">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </button>
+                <div class="spotlight-viewport">
+                  <div class="spotlight-track" id="frameSuggestTrack"></div>
+                </div>
+                <button class="spotlight-nav next" type="button" aria-label="Khung tiếp">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </button>
+                <aside class="frame-suggest-detail" aria-live="polite">
+                  <div class="frame-suggest-media">
+                    <img id="frameSuggestPreview" src="" alt="Khung gợi ý" loading="lazy">
+                  </div>
+                  <div class="frame-suggest-copy">
+                    <span class="frame-suggest-tag">Gợi ý khung</span>
+                    <h3 id="frameSuggestTitle">Khung gợi ý</h3>
+                    <p id="frameSuggestDesc">Chọn khung bên trái để xem mô tả.</p>
+                    <span id="frameSuggestMeta" class="frame-suggest-meta"></span>
+                  </div>
+                </aside>
+              </div>
+          </section>
+
+        </div>
+
+        <aside class="capture__drawer" id="captureDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle"
+          aria-hidden="true" tabindex="-1">
+          <div class="capture__drawerHeader">
+            <h2 id="drawerTitle">Thiết lập</h2>
+            <button class="drawer-close" type="button" aria-label="Đóng thiết lập">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 6l12 12M18 6l-12 12" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" />
+              </svg>
+            </button>
+          </div>
+          <div class="capture__drawerContent">
+            <div class="drawer-section">
+              <div class="control">
+                <label for="timerSelect">Timer</label>
+                <select id="timerSelect">
+                  <option value="0">0s</option>
+                  <option value="3">3s</option>
+                  <option value="5">5s</option>
+                </select>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="control">
+                <label for="filterSelect">Filter</label>
+                <select id="filterSelect">
+                  <option value="clean">Clean</option>
+                  <option value="noir">Noir</option>
+                  <option value="soft">Soft</option>
+                  <option value="neon">Neon</option>
+                  <option value="vintage">Vintage</option>
+                </select>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="control">
+                <label for="frameSelect">Frame</label>
+                <select id="frameSelect">
+                  <option value="none">None</option>
+                  <option value="film">Film</option>
+                  <option value="arcade">Arcade</option>
+                  <option value="petal">Petal</option>
+                </select>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="control ratio-control">
+                <span class="control-label">Tỷ lệ khung</span>
+                <div class="ratio-options" role="radiogroup" aria-label="Ty le khung">
+                  <label class="ratio-option">
+                    <input type="radio" name="ratio" value="9-16">
+                    <span class="ratio-figure ratio-9-16" aria-hidden="true"></span>
+                    <span class="ratio-text">9:16</span>
+                  </label>
+                  <label class="ratio-option">
+                    <input type="radio" name="ratio" value="16-9" checked>
+                    <span class="ratio-figure ratio-16-9" aria-hidden="true"></span>
+                    <span class="ratio-text">16:9</span>
+                  </label>
+                  <label class="ratio-option">
+                    <input type="radio" name="ratio" value="4-3">
+                    <span class="ratio-figure ratio-4-3" aria-hidden="true"></span>
+                    <span class="ratio-text">4:3</span>
+                  </label>
+                  <label class="ratio-option">
+                    <input type="radio" name="ratio" value="1-1">
+                    <span class="ratio-figure ratio-1-1" aria-hidden="true"></span>
+                    <span class="ratio-text">Vuông</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="control">
+                <label>Camera</label>
+                <div class="camera-actions">
+                  <button id="switchBtn" class="ghost" type="button">Đổi camera</button>
+                  <button id="flipBtn" class="ghost" type="button" aria-pressed="false">Lật camera</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <button class="capture__drawerToggle" id="drawerToggle" aria-expanded="false" aria-controls="captureDrawer">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h10M17 7h3M7 12h13M4 12h1M4 17h6M13 17h7" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" />
+            <circle cx="14" cy="7" r="2" fill="currentColor" />
+            <circle cx="6" cy="12" r="2" fill="currentColor" />
+            <circle cx="10" cy="17" r="2" fill="currentColor" />
+          </svg>
+        </button>
+        <div class="capture__backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Photobooth Studio - Chụp ảnh.</span>
+    </footer>
+  </main>
+
+  <a class="ig-badge ig-float" href="https://www.instagram.com/xduchuy_/" target="_blank" rel="noopener"
+    aria-label="Instagram">
+    <span class="ig-icon" aria-hidden="true"></span>
+    <div>
+      <span data-i18n="ig.follow">Follow us on Instagram</span>
+      <strong>@xduchuy_</strong>
+    </div>
+  </a>
+
+  <div class="spin-badge" aria-hidden="true">
+    <img src="xoay.png" alt="">
+  </div>
+
+  <script src="script.js"></script>
+  <script src="lang.js"></script>
+  <script src="search.js"></script>
+  <script src="spotlight.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log('Service Worker registered', reg))
+          .catch(err => console.log('Service Worker registration failed', err));
+      });
+    }
+  </script>
+</body>
+
+</html>

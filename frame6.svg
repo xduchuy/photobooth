@@ -1,0 +1,30 @@
+<svg width="540" height="720" viewBox="0 0 540 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff9a9e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fecfef;stop-opacity:1" />
+    </linearGradient>
+    <mask id="summer-mask">
+      <rect width="540" height="720" fill="white"/>
+      <!-- Main Photo Area -->
+      <rect x="30" y="30" width="480" height="580" rx="10" fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- Gradient Border Background -->
+  <rect width="540" height="720" rx="20" fill="url(#grad1)" mask="url(#summer-mask)"/>
+  
+  <!-- Inner Transparent Photo Zone Border (Simulated) -->
+  <rect x="30" y="30" width="480" height="580" rx="10" fill="none" stroke="white" stroke-width="0"/> <!-- Invisible helper or just hole -->
+  
+  <!-- Decorative inner line -->
+  <rect x="40" y="40" width="460" height="560" rx="5" fill="none" stroke="#eee" stroke-width="2"/>
+
+  <!-- Bottom Label Area -->
+  <text x="270" y="660" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="32" fill="white" letter-spacing="2">SUMMER</text>
+  <text x="270" y="690" text-anchor="middle" font-family="sans-serif" font-size="14" fill="white" opacity="0.8">2026 EDITION</text>
+  
+  <!-- Cute Icons -->
+  <path d="M50 650 Q 60 640 70 650 T 90 650" stroke="white" stroke-width="3" fill="none" opacity="0.8"/>
+  <circle cx="480" cy="660" r="12" fill="white" fill-opacity="0.4"/>
+</svg>

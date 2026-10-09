@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gioi thieu - Photobooth</title>
+  <meta name="description" content="Gioi thieu phong cach va brand kit cho Photobooth.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="about-page">
+  <div class="noise" aria-hidden="true"></div>
+
+  <main class="app">
+    <header class="topbar">
+      <div class="topbar-left">
+        <a class="logo-link" href="index.html" aria-label="Home" data-i18n-aria="brand.home">
+          <img class="logo-img" src="fire.png" alt="Photobooth logo" data-i18n-alt="brand.logoAlt">
+        </a>
+      </div>
+      <nav class="nav">
+        <a href="gioithieu.html" data-i18n="nav.about" aria-current="page">giới thiệu</a>
+        <a href="layout.html" data-i18n="nav.choose">studio</a>
+        <a href="chinhsach.html" data-i18n="nav.privacy">chính sách</a>
+        <a href="index.html#contact" data-i18n="nav.contact">liên hệ</a>
+      </nav>
+      <div class="topbar-right">
+        <button class="lang-toggle" type="button" aria-label="Switch language">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+            <path d="M3.5 12h17M12 3.5c2.5 2.8 4 6 4 8.5s-1.5 5.7-4 8.5M12 3.5c-2.5 2.8-4 6-4 8.5s1.5 5.7 4 8.5"
+              fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+          </svg>
+          <span class="lang-label">VI</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="about-hero">
+      <h1 class="about-hero-title" data-i18n="about.title">Sáng tạo. Lưu giữ. Chia sẻ.</h1>
+      <p class="about-hero-subtitle" data-i18n="about.subtitle">Trải nghiệm chụp ảnh photobooth miễn phí ngay trên
+        trình duyệt của bạn. Không cần cài đặt, bảo mật tuyệt đối.</p>
+      <a href="layout.html" class="about-cta" data-i18n="about.cta">Khám phá Studio</a>
+    </section>
+
+    <section class="about-board">
+      <div class="about-grid">
+        <article class="about-card about-card--brand">
+          <div class="brand-kit">
+            <div class="brand-kit__carousel">
+              <button class="brand-kit__nav brand-kit__nav--prev" id="brandKitPrev" type="button"
+                aria-label="Xem cặp trước">
+                <span aria-hidden="true">&lt;</span>
+              </button>
+              <div class="brand-kit__track" id="brandKitTrack">
+                <article class="brand-kit__panel brand-kit__panel--current">
+                  <div class="brand-kit__body">
+                    <div class="brand-kit__product">
+                      <div class="brand-kit__product-frame">
+                        <div class="brand-kit__count" id="photoCount">0</div>
+                      </div>
+                      <div class="brand-kit__progress">
+                        <span class="brand-kit__progress-text" id="photoProgressText">0/50</span>
+                        <div class="brand-kit__progress-track">
+                          <span class="brand-kit__progress-fill" id="photoProgressFill"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="brand-kit__radar">
+                      <div class="brand-kit__dial">
+                        <span class="brand-kit__level" id="photoLevel">0</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                <article class="brand-kit__panel" data-level="2" data-target="50">
+                  <div class="brand-kit__body">
+                    <div class="brand-kit__product">
+                      <div class="brand-kit__product-frame">
+                        <div class="brand-kit__count">50</div>
+                      </div>
+                      <div class="brand-kit__progress">
+                        <span class="brand-kit__progress-text">50/1000</span>
+                        <div class="brand-kit__progress-track">
+                          <span class="brand-kit__progress-fill"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="brand-kit__radar">
+                      <div class="brand-kit__dial">
+                        <span class="brand-kit__level">2</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                <article class="brand-kit__panel" data-level="3" data-target="100">
+                  <div class="brand-kit__body">
+                    <div class="brand-kit__product">
+                      <div class="brand-kit__product-frame">
+                        <div class="brand-kit__count">100</div>
+                      </div>
+                      <div class="brand-kit__progress">
+                        <span class="brand-kit__progress-text">100/1000</span>
+                        <div class="brand-kit__progress-track">
+                          <span class="brand-kit__progress-fill"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="brand-kit__radar">
+                      <div class="brand-kit__dial">
+                        <span class="brand-kit__level">3</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                <article class="brand-kit__panel" data-level="4" data-target="200">
+                  <div class="brand-kit__body">
+                    <div class="brand-kit__product">
+                      <div class="brand-kit__product-frame">
+                        <div class="brand-kit__count">200</div>
+                      </div>
+                      <div class="brand-kit__progress">
+                        <span class="brand-kit__progress-text">200/1000</span>
+                        <div class="brand-kit__progress-track">
+                          <span class="brand-kit__progress-fill"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="brand-kit__radar">
+                      <div class="brand-kit__dial">
+                        <span class="brand-kit__level">4</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                <article class="brand-kit__panel" data-level="5" data-target="500">
+                  <div class="brand-kit__body">
+                    <div class="brand-kit__product">
+                      <div class="brand-kit__product-frame">
+                        <div class="brand-kit__count">500</div>
+                      </div>
+                      <div class="brand-kit__progress">
+                        <span class="brand-kit__progress-text">500/1000</span>
+                        <div class="brand-kit__progress-track">
+                          <span class="brand-kit__progress-fill"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="brand-kit__radar">
+                      <div class="brand-kit__dial">
+                        <span class="brand-kit__level">5</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                <article class="brand-kit__panel" data-level="6" data-target="1000">
+                  <div class="brand-kit__body">
+                    <div class="brand-kit__product">
+                      <div class="brand-kit__product-frame">
+                        <div class="brand-kit__count">1000</div>
+                      </div>
+                      <div class="brand-kit__progress">
+                        <span class="brand-kit__progress-text">1000/1000</span>
+                        <div class="brand-kit__progress-track">
+                          <span class="brand-kit__progress-fill"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="brand-kit__radar">
+                      <div class="brand-kit__dial">
+                        <span class="brand-kit__level">6</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <button class="brand-kit__nav" id="brandKitNext" type="button" aria-label="Xem cặp tiếp">
+                <span aria-hidden="true">&gt;</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="about-card about-card--photo about-card--login" aria-label="Account login">
+          <div class="about-login">
+            <div class="about-login-avatar">
+              <img src="fire.png" alt="User logo">
+            </div>
+            <div class="about-login-actions">
+              <button class="about-app-btn about-app-btn--ghost" type="button">Sign up</button>
+              <button class="about-app-btn about-app-btn--solid" type="button">Login</button>
+            </div>
+          </div>
+        </article>
+
+        <div class="about-card about-card--swatch about-card--swatch-1">
+          <span>#CDB4DB</span>
+        </div>
+        <div class="about-card about-card--swatch about-card--swatch-2">
+          <span>#FFC8DD</span>
+        </div>
+        <div class="about-card about-card--swatch about-card--swatch-3">
+          <span>#FFAFCC</span>
+        </div>
+
+        <article class="about-card about-card--app">
+          <div class="about-app">
+            <div class="about-app-header">
+              <div class="about-app-logo">
+                <svg class="about-bag about-bag--small" viewBox="0 0 120 120" aria-hidden="true">
+                  <use href="#about-bag-icon"></use>
+                </svg>
+              </div>
+              <div>
+                <div class="about-app-title">Photo Booth</div>
+                <div class="about-app-sub">Sign in</div>
+              </div>
+            </div>
+            <div class="about-app-actions">
+              <button class="about-app-btn about-app-btn--ghost" type="button">Sign in</button>
+              <button class="about-app-btn about-app-btn--solid" type="button">Log in</button>
+            </div>
+            <span class="about-app-note">Log in with</span>
+          </div>
+        </article>
+
+        <article class="about-card about-card--type">
+          <div class="about-type">
+            <div class="about-type-left">
+              <span class="about-type-label">Typography</span>
+              <div class="about-type-name">Plus Jakarta Sans</div>
+            </div>
+            <div class="about-type-sample">AaBb</div>
+          </div>
+        </article>
+
+        <article class="about-card about-card--pack">
+          <div class="about-pack">
+            <div class="about-pack-slogan">
+              <span>Carry more</span>
+              <span>stress less</span>
+            </div>
+            <div class="about-pack-box">
+              <span class="about-pack-meta">Inside this booth</span>
+              <svg class="about-bag about-bag--large" viewBox="0 0 120 120" aria-hidden="true">
+                <use href="#about-bag-icon"></use>
+              </svg>
+              <span class="about-pack-title">PhotoBooth</span>
+              <span class="about-pack-note">Endless choices</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <svg class="about-symbols" aria-hidden="true" focusable="false">
+    <symbol id="about-bag-icon" viewBox="0 0 120 120">
+      <rect x="18" y="30" width="84" height="78" rx="16" fill="#58B98C" />
+      <rect x="30" y="44" width="60" height="52" rx="10" fill="#F7F3E8" />
+      <path d="M40 38c0-12 10-22 22-22s22 10 22 22" fill="none" stroke="#2F7C69" stroke-width="8"
+        stroke-linecap="round" />
+      <rect x="38" y="52" width="44" height="36" rx="6" fill="#FFB019" />
+      <path d="M38 64h44M38 76h44M52 52v36M66 52v36" stroke="#F7F3E8" stroke-width="4" stroke-linecap="round" />
+    </symbol>
+  </svg>
+
+  <script src="lang.js"></script>
+  <script src="about.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<svg width="560" height="460" viewBox="0 0 560 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask id="mono-mask">
+      <rect width="560" height="460" fill="white"/>
+      <!-- Photo Areas -->
+      <rect x="30" y="50" width="230" height="350" fill="black"/>
+      <rect x="300" y="50" width="230" height="350" fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- Minimal White Background -->
+  <rect width="560" height="460" fill="white" mask="url(#mono-mask)"/>
+  
+  <!-- Thick Black Border -->
+  <rect x="10" y="10" width="540" height="440" stroke="black" stroke-width="4" fill="none" pointer-events="none"/>
+  
+  <!-- Grid Layout Lines -->
+  <line x1="280" y1="10" x2="280" y2="450" stroke="black" stroke-width="2"/>
+  
+  <!-- Swiss Style Text -->
+  <text x="20" y="40" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="24" fill="black">001</text>
+  <text x="540" y="440" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="16" fill="black">MONO SERIES</text>
+  
+  <!-- Geometric Accent -->
+  <circle cx="520" cy="40" r="8" fill="black"/>
+</svg>

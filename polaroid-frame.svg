@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f2ece6"/>
+    </linearGradient>
+    <mask id="polaroid-hole" maskUnits="userSpaceOnUse">
+      <rect width="800" height="800" fill="#ffffff"/>
+      <rect x="140" y="80" width="520" height="520" rx="20" fill="#000000"/>
+    </mask>
+  </defs>
+  <rect x="18" y="18" width="764" height="764" rx="34" fill="url(#paper)" stroke="#e6ddd3" stroke-width="2" mask="url(#polaroid-hole)"/>
+  <rect x="140" y="80" width="520" height="520" rx="20" fill="none" stroke="#000000" stroke-opacity="0.08" stroke-width="3"/>
+  <line x1="180" y1="670" x2="620" y2="670" stroke="#e1d5cb" stroke-width="6" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio - Photobooth</title>
+  <meta name="description" content="Chon khung anh photobooth.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=3.3">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+</head>
+
+<body class="layout-page">
+  <div class="noise" aria-hidden="true"></div>
+
+  <main class="app">
+    <header class="topbar">
+      <div class="topbar-left">
+        <a class="logo-link" href="index.html" aria-label="Home" data-i18n-aria="brand.home">
+          <img class="logo-img" src="fire.png" alt="Photobooth logo" data-i18n-alt="brand.logoAlt">
+        </a>
+        <label class="search" for="searchInput">
+          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+            <line x1="16.2" y1="16.2" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            </line>
+          </svg>
+          <input id="searchInput" type="text" placeholder="layout" aria-label="Search"
+            data-i18n-placeholder="search.placeholder" data-i18n-aria="search.aria">
+        </label>
+      </div>
+      <nav class="nav">
+        <a href="gioithieu.html" data-i18n="nav.about">about</a>
+        <a href="layout.html" data-i18n="nav.choose">studio</a>
+        <a href="chinhsach.html" data-i18n="nav.privacy">privacy policy</a>
+        <a href="index.html#contact" data-i18n="nav.contact">contact</a>
+      </nav>
+      <div class="topbar-right">
+        <button class="lang-toggle" type="button" aria-label="Switch language">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+            <path d="M3.5 12h17M12 3.5c2.5 2.8 4 6 4 8.5s-1.5 5.7-4 8.5M12 3.5c-2.5 2.8-4 6-4 8.5s1.5 5.7 4 8.5"
+              fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+          </svg>
+          <span class="lang-label">VI</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="layout-hero">
+      <div class="layout-tabs" role="tablist" aria-label="Bo loc khung">
+        <button class="layout-tab is-active" type="button" data-filter="all">Tất cả</button>
+        <button class="layout-tab" type="button" data-filter="16-9">16:9</button>
+        <button class="layout-tab" type="button" data-filter="9-16">9:16</button>
+        <button class="layout-tab" type="button" data-filter="1-1">Vuông</button>
+      </div>
+    </section>
+
+    <section class="layout-grid" id="frameGrid" aria-live="polite">
+      <article class="layout-card" data-layout="9-16">
+        <img src="fr1.png" alt="Layout 1">
+      </article>
+      <article class="layout-card" data-layout="16-9">
+        <img src="fr2.png" alt="Layout 2">
+      </article>
+      <article class="layout-card" data-layout="9-16">
+        <img src="fr3.png" alt="Layout 3">
+      </article>
+      <article class="layout-card" data-layout="9-16">
+        <img src="fr4.png" alt="Layout 4">
+      </article>
+      <article class="layout-card" data-frame-id="frame5" data-layout="9-16" data-slots="3">
+        <img src="frame5.svg?v=1770038840887" alt="Layout 5 - Film Strip">
+      </article>
+      <article class="layout-card" data-frame-id="frame6" data-layout="3-4">
+        <img src="frame6.svg?v=1770038840887" alt="Layout 6 - Summer Card">
+      </article>
+      <article class="layout-card" data-frame-id="frame7" data-layout="1-1">
+        <img src="frame7.svg?v=1770038840887" alt="Layout 7 - Vintage">
+      </article>
+      <article class="layout-card" data-frame-id="frame8" data-layout="9-16" data-slots="2">
+        <img src="frame8.svg?v=1770038840887" alt="Layout 8 - Neon Cyberpunk">
+      </article>
+      <article class="layout-card" data-frame-id="frame9" data-layout="9-16">
+        <img src="frame9.svg?v=1770038840887" alt="Layout 9 - Floral Spring">
+      </article>
+      <article class="layout-card" data-frame-id="frame10" data-layout="16-9" data-slots="2">
+        <img src="frame10.svg?v=1770038840887" alt="Layout 10 - Minimal Mono">
+      </article>
+      <article class="layout-card" data-frame-id="frame11" data-layout="9-16">
+        <img
+          src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27520%27%20height%3D%27760%27%20viewBox%3D%270%200%20520%20760%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g11%27%20x1%3D%270%27%20y1%3D%271%27%20x2%3D%271%27%20y2%3D%270%27%3E%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27%23fbe6c7%27/%3E%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27%23fbd7df%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27520%27%20height%3D%27760%27%20fill%3D%27url%28%23g11%29%27/%3E%3Ccircle%20cx%3D%27220%27%20cy%3D%27220%27%20r%3D%27110%27%20fill%3D%27rgba%28255%2C255%2C255%2C0.55%29%27/%3E%3Ctext%20x%3D%2740%27%20y%3D%27700%27%20font-family%3D%27Space%20Grotesk%2C%20Arial%27%20font-size%3D%2732%27%20fill%3D%27%233a2a2a%27%3ELayout%2011%3C/text%3E%3C/svg%3E"
+          alt="Layout 11">
+      </article>
+      <article class="layout-card" data-frame-id="frame12" data-layout="16-9">
+        <img
+          src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27580%27%20height%3D%27520%27%20viewBox%3D%270%200%20580%20520%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g12%27%20x1%3D%271%27%20y1%3D%271%27%20x2%3D%270%27%20y2%3D%270%27%3E%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27%23e6d7ff%27/%3E%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27%23d7e9ff%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27580%27%20height%3D%27520%27%20fill%3D%27url%28%23g12%29%27/%3E%3Crect%20x%3D%2790%27%20y%3D%2790%27%20width%3D%27400%27%20height%3D%27200%27%20rx%3D%2730%27%20fill%3D%27rgba%28255%2C255%2C255%2C0.6%29%27/%3E%3Ctext%20x%3D%2740%27%20y%3D%27470%27%20font-family%3D%27Space%20Grotesk%2C%20Arial%27%20font-size%3D%2732%27%20fill%3D%27%233a2a2a%27%3ELayout%2012%3C/text%3E%3C/svg%3E"
+          alt="Layout 12">
+      </article>
+      <article class="layout-card" data-frame-id="frame13" data-layout="1-1">
+        <img src="frame13.svg?v=1770038840887" alt="Layout 13 - Pixel Game">
+      </article>
+      <article class="layout-card" data-frame-id="frame14" data-layout="9-16" data-slots="2">
+        <img src="frame14.svg?v=1770038840887" alt="Layout 14 - Dreamy Clouds">
+      </article>
+      <article class="layout-card" data-frame-id="frame15" data-layout="16-9">
+        <img src="frame15.svg?v=1770038840887" alt="Layout 15 - Cinematic">
+      </article>
+      <article class="layout-card" data-frame-id="frame16" data-layout="9-16">
+        <img src="frame16.svg?v=1770038840887" alt="Layout 16 - Vogue Cover">
+      </article>
+      <article class="layout-card" data-frame-id="frame17" data-layout="9-16">
+        <img src="frame17.svg?v=1770038840887" alt="Layout 17 - Wanted Poster">
+      </article>
+      <article class="layout-card" data-frame-id="frame18" data-layout="1-1">
+        <img src="frame18.svg?v=1770038840887" alt="Layout 18 - Digital Pet">
+      </article>
+      <article class="layout-card" data-frame-id="frame19" data-layout="1-1">
+        <img src="frame19.svg?v=1770038840887" alt="Layout 19 - Album Art">
+      </article>
+      <article class="layout-card" data-frame-id="frame20" data-layout="9-16">
+        <img src="frame20.svg?v=1770038840887" alt="Layout 20 - Social Live">
+      </article>
+      <article class="layout-card" data-frame-id="frame21" data-layout="3-4">
+        <img src="frame21.svg?v=1770038840887" alt="Layout 21 - Scrapbook">
+      </article>
+      <article class="layout-card" data-frame-id="frame22" data-layout="9-16">
+        <img src="frame22.svg?v=1770038840887" alt="Layout 22 - Rainy Mood">
+      </article>
+      <article class="layout-card" data-frame-id="frame23" data-layout="1-1">
+        <img src="frame23.svg?v=1770038840887" alt="Layout 23 - Locket">
+      </article>
+      <article class="layout-card" data-frame-id="frame24" data-layout="1-1" data-slots="4">
+        <img src="frame24.svg" alt="Layout 24 - Grid 4x">
+      </article>
+      <article class="layout-card" data-frame-id="frame25" data-layout="9-16" data-slots="4">
+        <img src="frame25.svg" alt="Layout 25 - Classic Strip 4">
+      </article>
+      <article class="layout-card" data-frame-id="frame26" data-layout="1-1">
+        <img src="frame26.svg?v=1770038840887" alt="Layout 26 - Blob">
+      </article>
+      <article class="layout-card" data-frame-id="frame27" data-layout="16-9">
+        <img src="frame27.svg?v=1770038840887" alt="Layout 27 - VHS Glitch">
+      </article>
+      <article class="layout-card" data-frame-id="frame28" data-layout="9-16">
+        <img src="frame28.svg?v=1770038840887" alt="Layout 28 - Daily News">
+      </article>
+      <article class="layout-card" data-frame-id="frame29" data-layout="3-4">
+        <img src="frame29.svg?v=1770038840887" alt="Layout 29 - Winter">
+      </article>
+      <article class="layout-card" data-frame-id="frame30" data-layout="1-1">
+        <img src="frame30.svg?v=1770038840887" alt="Layout 30 - Spooky">
+      </article>
+      <article class="layout-card" data-frame-id="frame31" data-layout="9-16">
+        <img src="frame31.svg?v=1770038840887" alt="Layout 31 - Meow">
+      </article>
+      <article class="layout-card" data-frame-id="frame32" data-layout="1-1">
+        <img src="frame32.svg?v=1770038840887" alt="Layout 32 - HBD">
+      </article>
+      <article class="layout-card" data-frame-id="frame33" data-layout="16-9">
+        <img src="frame33.svg?v=1770038840887" alt="Layout 33 - Western Wide">
+      </article>
+      <article class="layout-card" data-frame-id="frame34" data-layout="16-9">
+        <img src="frame34.svg?v=1770038840887" alt="Layout 34 - News TV">
+      </article>
+      <article class="layout-card" data-frame-id="frame35" data-layout="3-4">
+        <img src="frame35.svg?v=1770038840887" alt="Layout 35 - Museum">
+      </article>
+      <article class="layout-card" data-frame-id="frame36" data-layout="9-16">
+        <img src="frame36.svg?v=1770038840887" alt="Layout 36 - Retro OS">
+      </article>
+      <article class="layout-card" data-frame-id="frame37" data-layout="16-9">
+        <img src="frame37.svg?v=1770038840887" alt="Layout 37 - Console">
+      </article>
+      <article class="layout-card" data-frame-id="frame38" data-layout="16-9">
+        <img src="frame38.svg?v=1770038840887" alt="Layout 38 - CCTV">
+      </article>
+      <article class="layout-card" data-frame-id="frame39" data-layout="1-1">
+        <img src="frame39.svg?v=1770038840887" alt="Layout 39 - Porthole">
+      </article>
+      <article class="layout-card" data-frame-id="frame40" data-layout="1-1">
+        <img src="frame40.svg?v=1770038840887" alt="Layout 40 - Vinyl">
+      </article>
+      <article class="layout-card" data-frame-id="frame41" data-layout="9-16">
+        <img src="frame41.svg?v=1770038840887" alt="Layout 41 - Messenger">
+      </article>
+      <article class="layout-card" data-frame-id="frame42" data-layout="9-16">
+        <img src="frame42.svg?v=1770038840887" alt="Layout 42 - Tarot">
+      </article>
+      <article class="layout-card" data-frame-id="frame43" data-layout="1-1">
+        <img src="frame43.svg?v=1770038840887" alt="Layout 43 - Stamp">
+      </article>
+      <article class="layout-card" data-frame-id="frame44" data-layout="9-16">
+        <img src="frame44.svg?v=1770038840887" alt="Layout 44 - Phone UI">
+      </article>
+      <article class="layout-card" data-frame-id="frame45" data-layout="16-9">
+        <img src="frame45.svg?v=1770038840887" alt="Layout 45 - Anime">
+      </article>
+      <article class="layout-card" data-frame-id="frame46" data-layout="3-4" data-slots="3">
+        <img src="frame46.svg" alt="Layout 46 - Comic">
+      </article>
+      <article class="layout-card" data-frame-id="frame47" data-layout="1-1">
+        <img src="frame47.svg?v=1770038840887" alt="Layout 47 - Sketch">
+      </article>
+      <article class="layout-card" data-frame-id="frame48" data-layout="3-4">
+        <img src="frame48.svg?v=1770038840887" alt="Layout 48 - Neon Bar">
+      </article>
+      <article class="layout-card" data-frame-id="frame49" data-layout="9-16">
+        <img src="frame49.svg?v=1770038840887" alt="Layout 49 - Cyber Wanted">
+      </article>
+      <article class="layout-card" data-frame-id="frame50" data-layout="3-4">
+        <img src="frame50.svg?v=1770038840887" alt="Layout 50 - Card">
+      </article>
+      <article class="layout-card" data-frame-id="frame51" data-layout="16-9">
+        <img src="frame51.svg?v=1770038840887" alt="Layout 51 - Ticket">
+      </article>
+      <article class="layout-card" data-frame-id="frame52" data-layout="4-3">
+        <img src="frame52.svg?v=1770038840887" alt="Layout 52 - Browser">
+      </article>
+      <article class="layout-card" data-frame-id="frame53" data-layout="1-1">
+        <img src="frame53.svg?v=1770038840887" alt="Layout 53 - Billboard">
+      </article>
+      <article class="layout-card" data-frame-id="frame54" data-layout="1-1">
+        <img src="frame54.svg?v=1770038840887" alt="Layout 54 - Fish Eye">
+      </article>
+      <article class="layout-card" data-frame-id="frame55" data-layout="9-16">
+        <img src="frame55.svg?v=1770038840887" alt="Layout 55 - Receipt">
+      </article>
+      <article class="layout-card" data-frame-id="frame56" data-layout="1-1">
+        <img src="frame56.svg?v=1770038840887" alt="Layout 56 - Alien Hero">
+      </article>
+      <article class="layout-card" data-frame-id="frame57" data-layout="9-16">
+        <img src="frame57.svg?v=1770038840887" alt="Layout 57 - Adventure">
+      </article>
+      <article class="layout-card" data-frame-id="frame58" data-layout="3-4">
+        <img src="frame58.svg?v=1770038840887" alt="Layout 58 - Chase">
+      </article>
+      <article class="layout-card" data-frame-id="frame59" data-layout="1-1">
+        <img src="frame59.svg?v=1770038840887" alt="Layout 59 - Magic Mouse">
+      </article>
+      <article class="layout-card" data-frame-id="frame60" data-layout="9-16">
+        <img src="frame60.svg?v=1770038840887" alt="Layout 60 - Pika">
+      </article>
+      <article class="layout-card" data-frame-id="frame61" data-layout="1-1">
+        <img src="frame61.svg?v=1770038840887" alt="Layout 61 - Sponge">
+      </article>
+      <article class="layout-card" data-frame-id="frame62" data-layout="1-1">
+        <img src="frame62.svg?v=1770038840887" alt="Layout 62 - Robot Cat">
+      </article>
+      <article class="layout-card" data-frame-id="frame63" data-layout="9-16">
+        <img src="frame63.svg?v=1770038840887" alt="Layout 63 - Girl Power">
+      </article>
+      <article class="layout-card" data-frame-id="frame64" data-layout="9-16">
+        <img src="frame64.svg?v=1770038840887" alt="Layout 64 - Spider">
+      </article>
+      <article class="layout-card" data-frame-id="frame65" data-layout="1-1">
+        <img src="frame65.svg?v=1770038840887" alt="Layout 65 - Kitty">
+      </article>
+    </section>
+
+    <footer class="footer">
+      <span>Photobooth Studio - Khung ảnh.</span>
+    </footer>
+  </main>
+
+  <a class="ig-badge ig-float" href="https://www.instagram.com/xduchuy_/" target="_blank" rel="noopener"
+    aria-label="Instagram">
+    <span class="ig-icon" aria-hidden="true"></span>
+    <div>
+      <span data-i18n="ig.follow">Follow us on Instagram</span>
+      <strong>@xduchuy_</strong>
+    </div>
+  </a>
+
+  <div class="spin-badge" aria-hidden="true">
+    <img src="xoay.png" alt="">
+  </div>
+
+  <script src="lang.js"></script>
+  <script src="search.js"></script>
+  <script src="layout.js?v=3.2"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log('Service Worker registered', reg))
+          .catch(err => console.log('Service Worker registration failed', err));
+      });
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<svg width="540" height="660" viewBox="0 0 540 660" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask id="spring-mask">
+      <rect width="540" height="660" fill="white"/>
+      <!-- Photo Area -->
+      <rect x="60" y="60" width="420" height="480" rx="140" fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- Soft Green Background -->
+  <rect width="540" height="660" fill="#e8f5e9" mask="url(#spring-mask)"/>
+  
+  <!-- Organic Shapes/Leaves (Underneath mask? No, on top usually for depth, or part of BG) -->
+  <!-- Let's put some on BG but they get cut by mask, others on top -->
+  <circle cx="0" cy="0" r="120" fill="#c8e6c9" fill-opacity="0.6"/>
+  <circle cx="540" cy="660" r="150" fill="#a5d6a7" fill-opacity="0.6"/>
+  
+  <!-- Photo Area Border -->
+  <rect x="50" y="50" width="440" height="500" rx="150" fill="none" stroke="#81c784" stroke-width="2" stroke-dasharray="8 8"/>
+  
+  <!-- Flower Simple Icons -->
+  <path d="M60 600 Q 80 550 100 600 T 140 600" stroke="#66bb6a" stroke-width="4" fill="none"/>
+  <circle cx="60" cy="580" r="5" fill="#ef5350"/>
+  <circle cx="100" cy="570" r="5" fill="#ef5350"/>
+  <circle cx="140" cy="580" r="5" fill="#ef5350"/>
+  
+  <!-- Text -->
+  <text x="270" y="600" text-anchor="middle" font-family="cursive" font-weight="bold" font-size="28" fill="#388e3c">Spring Vibes</text>
+</svg>
