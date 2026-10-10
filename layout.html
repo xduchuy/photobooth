@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -63,16 +63,16 @@
     </section>
 
     <section class="layout-grid" id="frameGrid" aria-live="polite">
-      <article class="layout-card" data-layout="9-16">
+      <article class="layout-card" data-frame-id="fr1" data-layout="9-16" data-slots="3">
         <img src="fr1.png" alt="Layout 1">
       </article>
-      <article class="layout-card" data-layout="16-9">
+      <article class="layout-card" data-frame-id="fr2" data-layout="9-16" data-slots="1">
         <img src="fr2.png" alt="Layout 2">
       </article>
-      <article class="layout-card" data-layout="9-16">
+      <article class="layout-card" data-frame-id="fr3" data-layout="9-16" data-slots="4">
         <img src="fr3.png" alt="Layout 3">
       </article>
-      <article class="layout-card" data-layout="9-16">
+      <article class="layout-card" data-frame-id="fr4" data-layout="9-16" data-slots="4">
         <img src="fr4.png" alt="Layout 4">
       </article>
       <article class="layout-card" data-frame-id="frame5" data-layout="9-16" data-slots="3">
@@ -284,6 +284,7 @@
 
   <script src="lang.js"></script>
   <script src="search.js"></script>
+  <script src="frames-data.js"></script>
   <script src="layout.js?v=3.2"></script>
   <script>
     if ('serviceWorker' in navigator) {

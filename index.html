@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -195,7 +195,7 @@
               </div>
             </a>
 
-            <a class="social-card social-card--email" href="mailto:hello@example.com" aria-label="Email">
+            <a class="social-card social-card--email" href="mailto:huy1722007@gmail.com" aria-label="Email">
               <div class="social-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                   stroke-linejoin="round">
@@ -205,14 +205,14 @@
               </div>
               <div class="social-info">
                 <span class="social-name">Email</span>
-                <span class="social-handle">hello@photobooth.com</span>
+                <span class="social-handle">huy1722007@gmail.com</span>
               </div>
             </a>
           </div>
         </div>
 
         <div class="contact-form-card">
-          <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault();">
+          <form class="contact-form" id="contactForm" onsubmit="event.preventDefault(); const n = document.getElementById('name').value; const m = document.getElementById('message').value; const e = document.getElementById('email').value; window.location.href = 'mailto:huy1722007@gmail.com?subject=' + encodeURIComponent('Liên hệ từ ' + n) + '&body=' + encodeURIComponent(m + '\n\nTừ email: ' + e);">
             <div class="form-group">
               <label for="name" data-i18n="contact.name">Tên của bạn</label>
               <input type="text" id="name" name="name" placeholder="Nhập tên của bạn..."
@@ -229,13 +229,16 @@
                 data-i18n-placeholder="contact.placeholderMessage" required></textarea>
             </div>
             <button type="submit" class="submit-btn">
-              <span data-i18n="contact.send">Gửi tin nhắn</span>
+              <span data-i18n="contact.send">Gửi qua Email</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round">
                 <line x1="22" y1="2" x2="11" y2="13" />
                 <polygon points="22 2 15 22 11 13 2 9 22 2" />
               </svg>
             </button>
+            <p class="form-help-text" style="font-size: 0.85rem; opacity: 0.75; margin-top: 0.75rem;">
+              * Biểu mẫu sẽ mở ứng dụng thư gửi tới <strong>huy1722007@gmail.com</strong>.
+            </p>
           </form>
         </div>
       </div>

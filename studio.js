@@ -17,31 +17,48 @@ function showEmptyState() {
   disableDownload();
 }
 
-let latestPhoto = "";
-let recentPhotos = [];
+async function initStudio() {
+  let latestPhoto = "";
+  let recentPhotos = [];
 
-try {
-  latestPhoto = localStorage.getItem("latestPhoto") || "";
-  const raw = localStorage.getItem("latestPhotos");
-  recentPhotos = raw ? JSON.parse(raw) : [];
-} catch (error) {
-  latestPhoto = "";
-  recentPhotos = [];
+  if (window.PhotoStorage) {
+    latestPhoto = await window.PhotoStorage.getLatestPhoto();
+    recentPhotos = await window.PhotoStorage.getRecentPhotos(10);
+  } else {
+    try {
+      latestPhoto = localStorage.getItem("latestPhoto") || "";
+      const raw = localStorage.getItem("latestPhotos");
+      recentPhotos = raw ? JSON.parse(raw) : [];
+    } catch (error) {
+      latestPhoto = "";
+      recentPhotos = [];
+    }
+  }
+
+  if (!latestPhoto) {
+    showEmptyState();
+  } else {
+    if (photoEl) {
+      photoEl.src = latestPhoto;
+    }
+    if (downloadLink) {
+      downloadLink.href = latestPhoto;
+    }
+  }
+
+  if (recentGallery && Array.isArray(recentPhotos)) {
+    recentGallery.innerHTML = "";
+    recentPhotos.slice(0, 10).forEach((dataUrl) => {
+      const img = new Image();
+      img.src = dataUrl;
+      img.alt = "Ảnh gần nhất";
+      img.addEventListener("click", () => {
+        if (photoEl) photoEl.src = dataUrl;
+        if (downloadLink) downloadLink.href = dataUrl;
+      });
+      recentGallery.append(img);
+    });
+  }
 }
 
-if (!latestPhoto) {
-  showEmptyState();
-} else {
-  photoEl.src = latestPhoto;
-  downloadLink.href = latestPhoto;
-}
-
-if (recentGallery && Array.isArray(recentPhotos)) {
-  recentGallery.innerHTML = "";
-  recentPhotos.slice(0, 10).forEach((dataUrl) => {
-    const img = new Image();
-    img.src = dataUrl;
-    img.alt = "Ảnh gần nhất";
-    recentGallery.append(img);
-  });
-}
+initStudio();

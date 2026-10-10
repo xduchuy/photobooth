@@ -110,21 +110,27 @@ function setSelectedFrame(id) {
   });
 
   // Data persistence for Capture Page
-  const selected = frameElements.find(f => f.id === id);
-  if (selected) {
-    // For now, we update the simple ID. 
-    // IMPORTANT: The capture page might rely on 'frameLibrary' in localStorage.
-    // We should probably sync the selected frame config to localStorage so capture page can use it.
-
+  const builtin = (window.BUILTIN_FRAMES || []).find(f => f && f.id === id);
+  if (builtin) {
     const frameConfig = {
-      id: selected.id,
-      src: selected.src,
-      ratio: selected.ratio,
-      slots: [] // Auto-detect in capture page or assuming full frame
+      id: builtin.id,
+      name: builtin.name,
+      src: builtin.src,
+      ratio: builtin.ratio,
+      slots: builtin.slots
     };
-
-    console.log("Selected Frame Config:", frameConfig);
     localStorage.setItem("currentFrameConfig", JSON.stringify(frameConfig));
+  } else {
+    const selected = frameElements.find(f => f.id === id);
+    if (selected) {
+      const frameConfig = {
+        id: selected.id,
+        src: selected.src,
+        ratio: selected.ratio,
+        slots: []
+      };
+      localStorage.setItem("currentFrameConfig", JSON.stringify(frameConfig));
+    }
   }
 }
 let activeQuery = "";

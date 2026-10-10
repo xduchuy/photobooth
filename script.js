@@ -1,4 +1,4 @@
-﻿const video = document.getElementById("video");
+const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const stage = document.querySelector(".stage");
 const gallery = document.getElementById("gallery");
@@ -19,7 +19,7 @@ const defaultFrameConfig = {
   ],
 };
 
-const BUILTIN_FRAMES = [
+const BUILTIN_FRAMES = window.BUILTIN_FRAMES || [
   {
     id: "fr1",
     name: "Frame 01",
@@ -40,7 +40,7 @@ const BUILTIN_FRAMES = [
     id: "fr3",
     name: "Frame 03",
     src: "fr3.png",
-    ratio: "16-9",
+    ratio: "9-16",
     slots: [
       { x: 36, y: 71, width: 635, height: 360 },
       { x: 36, y: 476, width: 635, height: 360 },
@@ -53,7 +53,7 @@ const BUILTIN_FRAMES = [
     id: "fr4",
     name: "Frame 04",
     src: "fr4.png",
-    ratio: "16-9",
+    ratio: "9-16",
     slots: [
       { x: 36, y: 71, width: 635, height: 360 },
       { x: 36, y: 476, width: 635, height: 360 },
@@ -461,75 +461,86 @@ function loadFrameAsset(src) {
     };
     frameImage.onerror = () => reject(new Error("frame-load-failed"));
   });
-  // Cache busting: Append timestamp
-  const cacheBuster = `?t=${Date.now()}`;
-  frameImage.src = src.startsWith("data:") ? src : (src + cacheBuster);
+  frameImage.src = src;
 }
 
 function loadFrameConfigFromStorage() {
-  try {
-    const stored = JSON.parse(localStorage.getItem(FRAME_STORE_KEY) || "[]");
-    const selectedId = localStorage.getItem(FRAME_SELECTED_KEY) || "";
-    const builtin = BUILTIN_FRAMES.find((frame) => frame && frame.id === selectedId);
-    if (builtin && builtin.src && Array.isArray(builtin.slots) && builtin.slots.length) {
-      frameConfig = { src: builtin.src, slots: builtin.slots, ratio: builtin.ratio || "" };
-      return;
+  const selectedId = localStorage.getItem(FRAME_SELECTED_KEY) || "";
+
+  // 1. Try to find in BUILTIN_FRAMES by selectedId
+  let matched = BUILTIN_FRAMES.find((frame) => frame && frame.id === selectedId);
+
+  // Handle legacy frame-idx-0 .. frame-idx-3 if present in localStorage
+  if (!matched && selectedId && selectedId.startsWith("frame-idx-")) {
+    const idx = parseInt(selectedId.replace("frame-idx-", ""), 10);
+    const legacyIds = ["fr1", "fr2", "fr3", "fr4"];
+    if (idx >= 0 && idx < legacyIds.length) {
+      matched = BUILTIN_FRAMES.find((frame) => frame && frame.id === legacyIds[idx]);
     }
-    const match = stored.find((frame) => frame && frame.id === selectedId);
-    if (match && match.src && Array.isArray(match.slots) && match.slots.length) {
-      frameConfig = { src: match.src, slots: match.slots, ratio: match.ratio || "" };
-      return;
-    }
-  } catch (error) {
-    // Ignore storage failures.
   }
 
-  // Fallback/Priority: Check for "currentFrameConfig" passed specifically from Studio
-  try {
-    const currentRaw = localStorage.getItem("currentFrameConfig");
-    if (currentRaw) {
-      const current = JSON.parse(currentRaw);
-      if (current && current.src) {
-        // Use this config
+  // 2. Check "currentFrameConfig" passed from Studio/layout
+  if (!matched) {
+    try {
+      const currentRaw = localStorage.getItem("currentFrameConfig");
+      if (currentRaw) {
+        const current = JSON.parse(currentRaw);
+        if (current && current.id) {
+          matched = BUILTIN_FRAMES.find((f) => f && f.id === current.id);
+        }
+        if (!matched && current && current.src && Array.isArray(current.slots) && current.slots.length) {
+          frameConfig = {
+            id: current.id || "custom",
+            name: current.name || "Khung tùy chọn",
+            src: current.src,
+            ratio: current.ratio || "9-16",
+            slots: current.slots
+          };
+          return;
+        }
+      }
+    } catch (e) {
+      // ignore parse errors
+    }
+  }
+
+  // 3. Check custom frames in FRAME_STORE_KEY
+  if (!matched) {
+    try {
+      const stored = JSON.parse(localStorage.getItem(FRAME_STORE_KEY) || "[]");
+      const matchInStore = stored.find((f) => f && f.id === selectedId);
+      if (matchInStore && matchInStore.src && Array.isArray(matchInStore.slots) && matchInStore.slots.length) {
         frameConfig = {
-          src: current.src,
-          ratio: current.ratio || "16-9",
-          slots: Array.isArray(current.slots) && current.slots.length ? current.slots :
-            (typeof current.slots === 'number' ? new Array(current.slots).fill(null) : []) // Handle number-only slots
+          id: matchInStore.id,
+          name: matchInStore.name || "Khung",
+          src: matchInStore.src,
+          slots: matchInStore.slots,
+          ratio: matchInStore.ratio || "9-16"
         };
-
-        // If slots are just a number (from our auto-detector), we might need to mock coordinates for the strip logic to work?
-        // The strip logic relies on `slots.length`. 
-        // However, `renderFrameComposite` needs ACTUAL coordinates (x,y,w,h) to draw.
-        // If we only have a count, we can't draw the composite correctly yet.
-        // BUT, for the user flow "Take X photos", we at least need the count.
-        // For now, let's trust that if it's a known frame, we might need to look up its coordinates if missing?
-        // Or simpler: If we lack coords, we just save the strip photos but maybe can't composite perfectly?
-        // Let's assume for now the user accepts the photo taking part is key.
-
-        // Better fix: If we have ID, try to find in builtins first.
-        // If not, use the config.
-        if (current.id) {
-          const builtin = BUILTIN_FRAMES.find(f => f.id === current.id);
-          if (builtin) {
-            frameConfig = { ...builtin };
-            return;
-          }
-        }
-
-        // If we have a number of slots but no coords, we should probably generate dummy slots so the logic holds
-        if (typeof current.slots === 'number') {
-          frameConfig.slots = new Array(current.slots).fill({ x: 0, y: 0, width: 0, height: 0 }); // Dummy slots
-        }
-
         return;
       }
+    } catch (e) {
+      // ignore
     }
-  } catch (e) {
-    console.error("Failed to load currentFrameConfig", e);
   }
 
-  frameConfig = { ...defaultFrameConfig };
+  // 4. If matched builtin frame found
+  if (matched && matched.src && Array.isArray(matched.slots) && matched.slots.length) {
+    frameConfig = {
+      id: matched.id,
+      name: matched.name,
+      src: matched.src,
+      slots: matched.slots,
+      ratio: matched.ratio || "9-16"
+    };
+    return;
+  }
+
+  // 5. Fallback if frame not found or invalid
+  frameConfig = { ...defaultFrameConfig, id: "fr1", name: "Frame 01" };
+  if (selectedId && selectedId !== "fr1") {
+    setStatus("Khung đã chọn không khả dụng, đã chuyển về khung mặc định.", "warning");
+  }
 }
 
 loadFrameConfigFromStorage();
@@ -598,15 +609,20 @@ function bumpPhotoCount() {
   }
 }
 
-function storeLatestShot(dataUrl) {
-  try {
-    localStorage.setItem("latestPhoto", dataUrl);
-    const raw = localStorage.getItem("latestPhotos");
-    const list = raw ? JSON.parse(raw) : [];
-    const next = [dataUrl, ...list.filter((item) => item !== dataUrl)].slice(0, 10);
-    localStorage.setItem("latestPhotos", JSON.stringify(next));
-  } catch (error) {
-    // Ignore storage failures (private mode, quota, etc.).
+async function storeLatestShot(dataUrl) {
+  if (!dataUrl) return;
+  if (window.PhotoStorage) {
+    await window.PhotoStorage.savePhoto(dataUrl);
+  } else {
+    try {
+      localStorage.setItem("latestPhoto", dataUrl);
+      const raw = localStorage.getItem("latestPhotos");
+      const list = raw ? JSON.parse(raw) : [];
+      const next = [dataUrl, ...list.filter((item) => item !== dataUrl)].slice(0, 10);
+      localStorage.setItem("latestPhotos", JSON.stringify(next));
+    } catch (error) {
+      console.warn("Storage quota exceeded or storage blocked", error);
+    }
   }
   bumpPhotoCount();
 }
@@ -698,8 +714,12 @@ async function startCamera() {
   setStatus("Đang bật camera...");
 
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    setStatus("Trình duyệt không hỗ trợ camera.", "error");
-    showMock();
+    let msg = "Trình duyệt không hỗ trợ camera.";
+    if (window.isSecureContext === false) {
+      msg = "Camera yêu cầu kết nối an toàn (HTTPS hoặc localhost).";
+    }
+    setStatus(msg, "error");
+    showMock(msg);
     return;
   }
 
@@ -717,8 +737,19 @@ async function startCamera() {
     setCaptured(false);
     setStatus("Camera sẵn sàng.");
   } catch (error) {
-    setStatus("Không thể mở camera. Hãy cho phép truy cập.", "error");
-    showMock();
+    let errorMsg = "Không thể mở camera.";
+    if (error.name === "NotAllowedError" || error.name === "PermissionDeniedError") {
+      errorMsg = "Quyền camera bị từ chối. Hãy cho phép camera trong cài đặt trình duyệt.";
+    } else if (error.name === "NotFoundError" || error.name === "DevicesNotFoundError") {
+      errorMsg = "Không tìm thấy thiết bị camera trên máy.";
+    } else if (error.name === "NotReadableError" || error.name === "TrackStartError") {
+      errorMsg = "Camera đang bị ứng dụng khác sử dụng hoặc có xung đột phần cứng.";
+    } else if (error.name === "OverconstrainedError") {
+      errorMsg = "Chế độ camera được yêu cầu không được hỗ trợ.";
+    } else {
+      errorMsg = error.message || "Hãy kiểm tra quyền truy cập camera.";
+    }
+    showMock(errorMsg);
   }
 }
 
@@ -728,18 +759,22 @@ function stopCamera() {
   stream = null;
 }
 
-function showMock() {
+function showMock(reason = "") {
   const ctx = canvas.getContext("2d");
   canvas.width = 1280;
   canvas.height = 720;
-  drawMock(ctx, canvas.width, canvas.height);
+  drawMock(ctx, canvas.width, canvas.height, reason);
   latestDataUrl = canvas.toDataURL("image/png");
   mockOnly = true;
-  setCaptured(true);
-  setStatus("Đang dùng chế độ mô phỏng.");
+  setCaptured(true, { showStill: true });
+  if (reason) {
+    setStatus(`${reason} — Đang ở chế độ mô phỏng (Demo).`, "error");
+  } else {
+    setStatus("Đang ở chế độ mô phỏng (Demo).");
+  }
 }
 
-function drawMock(ctx, width, height) {
+function drawMock(ctx, width, height, reason = "") {
   const gradient = ctx.createLinearGradient(0, 0, width, height);
   gradient.addColorStop(0, "#202731");
   gradient.addColorStop(1, "#3a2c1d");
@@ -754,8 +789,14 @@ function drawMock(ctx, width, height) {
   ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
   ctx.font = "700 56px Space Grotesk";
   ctx.fillText("PHOTObooth", 64, 140);
-  ctx.font = "400 28px Space Grotesk";
-  ctx.fillText("Demo frame - không có camera", 64, 200);
+  ctx.fillStyle = "#ffbb66";
+  ctx.font = "600 28px Space Grotesk";
+  ctx.fillText("CHẾ ĐỘ MÔ PHỎNG (DEMO)", 64, 200);
+  if (reason) {
+    ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+    ctx.font = "400 20px Space Grotesk";
+    ctx.fillText(reason.slice(0, 70), 64, 240);
+  }
 }
 
 function showFramePreview() {
@@ -1383,56 +1424,74 @@ async function capturePhoto() {
   }
 
   isCapturing = true;
-  setStatus("Chuẩn bị chụp...");
+  try {
+    setStatus("Chuẩn bị chụp...");
 
-  const timer = Number.parseInt(timerSelect.value, 10);
-  if (timer > 0) {
-    for (let i = timer; i > 0; i--) {
-      countdownEl.textContent = i;
-      await wait(1000);
+    const timer = Number.parseInt(timerSelect.value, 10);
+    if (timer > 0) {
+      for (let i = timer; i > 0; i--) {
+        countdownEl.textContent = i;
+        await wait(1000);
+      }
+      countdownEl.textContent = "";
     }
-    countdownEl.textContent = "";
-  }
 
-  stage.classList.add("flash");
-  setTimeout(() => stage.classList.remove("flash"), 450);
+    stage.classList.add("flash");
+    setTimeout(() => stage.classList.remove("flash"), 450);
 
-  const width = video.videoWidth || canvas.width || 1280;
-  const height = video.videoHeight || canvas.height || 720;
-  canvas.width = width;
-  canvas.height = height;
+    const width = video.videoWidth || canvas.width || 1280;
+    const height = video.videoHeight || canvas.height || 720;
+    canvas.width = width;
+    canvas.height = height;
 
-  const ctx = canvas.getContext("2d");
-  ctx.filter = filterMap[filterSelect.value] || "none";
-  if (stream) {
-    drawVideoFrame(ctx, width, height);
-  } else {
-    drawMock(ctx, width, height);
-  }
-  ctx.filter = "none";
-  drawFrame(ctx, width, height, frameSelect.value);
+    const ctx = canvas.getContext("2d");
+    ctx.filter = filterMap[filterSelect.value] || "none";
+    if (stream) {
+      drawVideoFrame(ctx, width, height);
+    } else {
+      drawMock(ctx, width, height);
+    }
+    ctx.filter = "none";
+    drawFrame(ctx, width, height, frameSelect.value);
 
-  latestDataUrl = canvas.toDataURL("image/png");
-  storeLatestShot(latestDataUrl);
-  addToGallery(latestDataUrl);
-  stripShots.push(latestDataUrl);
-  updateStripUI();
+    latestDataUrl = canvas.toDataURL("image/png");
+    if (stripLimit === 1) {
+      await storeLatestShot(latestDataUrl);
+    }
+    addToGallery(latestDataUrl);
+    stripShots.push(latestDataUrl);
+    updateStripUI();
 
-  const isComplete = stripShots.length === stripLimit;
-  if (isComplete) {
-    const previewUrl = await renderFramePreview({ commit: true });
-    if (!previewUrl) {
+    const isComplete = stripShots.length === stripLimit;
+    if (isComplete) {
+      try {
+        const previewUrl = await renderFramePreview({ commit: true });
+        if (previewUrl) {
+          latestCompositeUrl = previewUrl;
+          await storeLatestShot(previewUrl);
+        } else {
+          setCaptured(true);
+        }
+      } catch (renderErr) {
+        console.error("Lỗi khi render ảnh ghép:", renderErr);
+        setStatus("Lỗi khi tạo ảnh ghép khung. Bạn vẫn có thể thử lưu lại.", "error");
+        setCaptured(true);
+      }
+      setGalleryCentered(true);
+      setStatus(`Đã đủ ${stripLimit} ảnh. Bạn có thể lưu hoặc chụp lại.`);
+    } else {
+      showCameraPreview();
       setCaptured(true);
+      setGalleryCentered(false);
+      setStatus(`Đã chụp xong! Còn ${stripLimit - stripShots.length} ảnh nữa.`);
     }
-    setGalleryCentered(true);
-    setStatus(`Đã đủ ${stripLimit} ảnh. Bạn có thể lưu hoặc chụp lại.`);
-  } else {
-    showCameraPreview();
-    setCaptured(true);
-    setGalleryCentered(false);
-    setStatus(`Đã chụp xong! Còn ${stripLimit - stripShots.length} ảnh nữa.`);
+  } catch (err) {
+    console.error("Lỗi trong quá trình chụp:", err);
+    setStatus("Lỗi khi chụp: " + (err.message || "vui lòng thử lại."), "error");
+  } finally {
+    isCapturing = false;
+    if (countdownEl) countdownEl.textContent = "";
   }
-  isCapturing = false;
 }
 
 function drawFrame(ctx, width, height, frame) {
@@ -1506,9 +1565,10 @@ function resetCaptureSession() {
   isCapturing = false;
 }
 
-function downloadShot() {
+async function downloadShot() {
   const dataUrl = latestCompositeUrl || latestDataUrl;
   if (!dataUrl) return;
+  await storeLatestShot(dataUrl);
   const label = latestCompositeUrl ? "photobooth-frame" : "photobooth";
   const link = document.createElement("a");
   link.href = dataUrl;
@@ -1522,18 +1582,27 @@ function retake() {
     return;
   }
   resetCaptureSession();
-  setStatus("Đã xóa tất cả ảnh. Hãy chụp lại từ đầu.");
+  setStatus("Đã xóa tất cả ảnh trong phiên này. Hãy chụp lại từ đầu.");
 }
 
 async function saveStrip() {
   if (stripShots.length !== stripLimit) return;
-  const dataUrl = latestCompositeUrl || (await buildFrameComposite());
-  if (!dataUrl) return;
-  latestCompositeUrl = dataUrl;
-  const link = document.createElement("a");
-  link.href = dataUrl;
-  link.download = `photobooth-frame-${Date.now()}.png`;
-  link.click();
+  try {
+    const dataUrl = latestCompositeUrl || (await buildFrameComposite());
+    if (!dataUrl) {
+      setStatus("Không thể tạo ảnh ghép để tải về.", "error");
+      return;
+    }
+    latestCompositeUrl = dataUrl;
+    await storeLatestShot(dataUrl);
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.download = `photobooth-frame-${Date.now()}.png`;
+    link.click();
+  } catch (err) {
+    console.error("Lỗi khi lưu khung ảnh:", err);
+    setStatus("Lỗi khi tải khung ảnh: " + (err.message || "vui lòng thử lại"), "error");
+  }
 }
 
 function resetStrip() {
